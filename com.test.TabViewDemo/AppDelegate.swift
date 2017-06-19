@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import MobileCenter
+import MobileCenterPush
+import MobileCenterAnalytics
+import MobileCenterCrashes
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        MSMobileCenter.setLogLevel(MSLogLevel.verbose)
+        MSMobileCenter.start("{ed471e5d-961e-4b86-811a-sea05a96e2760}", withServices: [MSAnalytics.self,
+                                                                                       MSCrashes.self,
+                                                                                       MSPush.self])
+        
+        MSAnalytics.trackEvent("First Click")
         // Override point for customization after application launch.
         return true
     }
@@ -39,6 +49,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func push(_ push: MSPush!, didReceive pushNotification: MSPushNotification!) {
+        var message: String = pushNotification.message
+        for item in pushNotification.customData {
+            message = String(format: "%@\n%@: %@", message, item.key, item.value)
+        }
+        let alert = UIAlertView(title: pushNotification.title, message: message, delegate: self, cancelButtonTitle: "OK")
+        alert.show()
     }
 
 

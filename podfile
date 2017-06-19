@@ -1,0 +1,4 @@
+target 'com.test.TabViewDemo' do
+pod 'MobileCenter'
+pod 'MobileCenter/MobileCenterPush'
+end
