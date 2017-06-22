@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         MSMobileCenter.setLogLevel(MSLogLevel.verbose)
-        MSMobileCenter.start("{ed471e5d-961e-4b86-811a-sea05a96e2760}", withServices: [MSAnalytics.self,
+        MSMobileCenter.start("{b966e6fa-f6cd-4c16-966d-e1efdedf7a53}", withServices: [MSAnalytics.self,
                                                                                        MSCrashes.self,
                                                                                        MSPush.self])
         
